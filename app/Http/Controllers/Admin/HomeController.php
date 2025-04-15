@@ -83,6 +83,42 @@ class HomeController extends Controller
 
         return redirect()->route('Doubtlist.index')->with('success', 'Doubt deleted successfully!');
     }
+
+
+    public function mplogin(){
+        $MPLoginList = DB::table('users')
+        ->leftjoin('mp_district','users.district','=','mp_district.id')
+        ->where('role',1)
+        ->where('state','mp')
+        ->select('users.*','mp_district.name as district')
+        ->orderBy('users.created_at', 'desc')
+        ->get();
+
+        return view('admin.mpstudent',compact('MPLoginList'));
+    }
+
+    public function cglogin(){
+        $CGLoginList = DB::table('users')
+        ->leftjoin('cg_district','users.district','=','cg_district.id')
+        ->where('role',1)
+        ->where('state','cg')
+        ->select('users.*','cg_district.name as district')
+        ->orderBy('users.created_at', 'desc')
+        ->get();
+        return view('admin.cgstudent',compact('CGLoginList'));
+    }
+
+    public function cgloginDlt($id){
+        $cgdlt = DB::table('users')->where('id',$id)->delete();
+        return redirect()->back()->with('success','Student Data Deleted Successfully!');
+      
+    }
+    
+    public function mploginDlt($id){
+        $mpdlt = DB::table('users')->where('id',$id)->delete();
+        return redirect()->back()->with('success','Student Data Deleted Successfully!');
+      
+    }
     
     public function logout(){
         $admin =Auth::guard('admin')->logout();

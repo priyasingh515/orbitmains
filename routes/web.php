@@ -53,6 +53,10 @@ Route::group(['prefix'=>'admin'],function(){
         Route::get('/enquerylist/{id}',[HomeController::class,'enqDlt'])->name('enquerylist.delete');
         Route::get('/Doubtlist',[HomeController::class,'doubts'])->name('Doubtlist.index');
         Route::get('/doubtDlt/{id}',[HomeController::class,'doubtDlt'])->name('doubtDlt.delete');
+        Route::get('/mplogin',[HomeController::class,'mplogin'])->name('mplogin.student');
+        Route::get('/cglogin',[HomeController::class,'cglogin'])->name('cglogin.student');
+        Route::get('/cgloginDlt/{id}',[HomeController::class,'cgloginDlt'])->name('cgdlt.student');
+        Route::get('/mploginDlt/{id}',[HomeController::class,'mploginDlt'])->name('mpdlt.student');
 
 
 
@@ -78,7 +82,8 @@ Route::group(['prefix'=>'admin'],function(){
         Route::get('/studentView/{id}',[StudentController::class,'studentView'])->name('student.view');
         Route::get('/ansswerEdit/{id}/{type}',[StudentController::class,'ansswerEdit'])->name('student.ansswerEdit');
         Route::post('/student/assign',[StudentController::class,'assignToTeacher'])->name('student.assign');
-        // Route::get('/student/delete/{id}', [StudentController::class, 'destroy'])->name('student.delete');
+        Route::get('/mpstudent/{id}', [StudentController::class, 'mpstudentanswer'])->name('mpstudent.delete');
+        Route::get('/cgstudent/{id}', [StudentController::class, 'cgstudentDlt'])->name('cgstudent.delete');
 
             //Question Route
         Route::get('/question',[QuestionController::class,'index'])->name('question.index');

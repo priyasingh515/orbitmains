@@ -10,27 +10,44 @@ use DB;
 class StudentController extends Controller
 {
     
-    public function index(){
-        $student = DB::table('users')
-            ->leftJoin('answer_sheets', 'users.id', '=', 'answer_sheets.student_id')
-            ->select(
-                'users.id', 
-                'users.name', 
-                'users.email', 
-                DB::raw("COUNT(CASE WHEN answer_sheets.status = 'pending' THEN 1 END) as pending_count")
-            )
-            ->where('users.role', '1')
-            ->where('users.state', 'cg')
-            ->groupBy('users.id', 'users.name', 'users.email')
-            ->get();
+    // public function index(){
+    //     $student = DB::table('users')
+    //         ->leftJoin('answer_sheets', 'users.id', '=', 'answer_sheets.student_id')
+    //         ->select(
+    //             'users.id', 
+    //             'users.name', 
+    //             'users.email', 
+    //             DB::raw("COUNT(CASE WHEN answer_sheets.status = 'pending' THEN 1 END) as pending_count")
+    //         )
+    //         ->where('users.role', '1')
+    //         ->where('users.state', 'cg')
+    //         ->groupBy('users.id', 'users.name', 'users.email')
+    //         ->get();
         
-        return view('admin.student.index',compact('student'));
-    }
+    //     return view('admin.student.index',compact('student'));
+    // }
+
+    public function index(){
+    $student = DB::table('users')
+        ->join('answer_sheets', 'users.id', '=', 'answer_sheets.student_id') // innerJoin
+        ->select(
+            'users.id', 
+            'users.name', 
+            'users.email', 
+            DB::raw("COUNT(CASE WHEN answer_sheets.status = 'pending' THEN 1 END) as pending_count")
+        )
+        ->where('users.role', '1')
+        ->where('users.state', 'cg')
+        ->groupBy('users.id', 'users.name', 'users.email')
+        ->get();
+    
+    return view('admin.student.index', compact('student'));
+}
 
 
     public function mpstudentList(){
         $student = DB::table('users')
-            ->leftJoin('answer_sheets', 'users.id', '=', 'answer_sheets.student_id')
+            ->Join('answer_sheets', 'users.id', '=', 'answer_sheets.student_id')
             ->select(
                 'users.id', 
                 'users.name', 
@@ -43,6 +60,21 @@ class StudentController extends Controller
             ->get();
         
         return view('admin.student.mpstudent_list',compact('student'));
+    }
+
+
+    public function mpstudentanswer($id){
+        DB::table('answer_sheets')->where('student_id', $id)->delete();
+
+        DB::table('users')->where('id', $id)->delete();
+        return redirect()->back()->with('success','Delete student data successfully');
+    }
+
+    public function cgstudentDlt($id) {
+        DB::table('answer_sheets')->where('student_id', $id)->delete();
+
+        DB::table('users')->where('id', $id)->delete();
+        return redirect()->back()->with('success','Delete student data successfully');
     }
 
     public function studentView($id)

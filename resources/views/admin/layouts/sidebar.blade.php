@@ -253,6 +253,29 @@
                             <p>Web Settings</p>
                         </a>
                     </li>
+
+                    <li class="nav-item has-treeview">
+                        <a href="" class="nav-link">
+                            <i class="nav-icon fas fa-file-alt"></i>
+                            <p>
+                                Login Student
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{route('cglogin.student')}}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>CG Student</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{route('mplogin.student')}}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>MP Student</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                 @endif
                 
                 							
