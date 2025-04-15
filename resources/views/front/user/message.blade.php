@@ -73,7 +73,11 @@
             <div class="row">
                 <!-- Sidebar -->
                 <nav class="col-md-3 col-lg-3 sidebar d-none d-md-block">
-                    <h4 style="font-size: 12px">{{Auth::user()->email}}</h4>
+                    @if(Auth::user()->name)
+                        <h4 style="font-size: 12px">Name: {{ Auth::user()->name }}</h4>
+                    @else
+                        <h4 style="font-size: 12px">Email: {{ Auth::user()->email }}</h4>
+                    @endif
                     @if ($activePlan)
                         <div class="alert alert-info">
                             <strong>Plan Details:</strong><br>

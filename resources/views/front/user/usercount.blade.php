@@ -59,7 +59,11 @@
             <div class="row">
                 <!-- Sidebar -->
                 <nav class="col-md-3 col-lg-3 sidebar d-none d-md-block">
-                    <h4 style="font-size: 12px">{{Auth::user()->email}}</h4>
+                    @if(Auth::user()->name)
+                        <h4 style="font-size: 12px">Name: {{ Auth::user()->name }}</h4>
+                    @else
+                        <h4 style="font-size: 12px">Email: {{ Auth::user()->email }}</h4>
+                    @endif
                     @if ($activePlan)
                         <div class="alert alert-info">
                             <strong>Plan Details:</strong><br>
@@ -130,7 +134,7 @@
                         <div class="row justify-content-center">
                             <div class="col-md-6 col-lg-4 mb-4">
                                 <a href="#" class="text-decoration-none">
-                                    <div class="card shadow-lg border-0 rounded-3 bg-light text-center py-2">
+                                    <div class="card shadow-lg border border-warning rounded-3 bg-light text-center py-2">
                                         <div class="card-body">
                                             <h6 class="text-muted text-uppercase fw-light">Total Submitted Answers</h6>
                                             <h2 class="fw-bold text-primary">{{ $totalSubmitted }}</h2> <!-- 🔵 Count Focused -->
@@ -141,7 +145,7 @@
                     
                             <div class="col-md-6 col-lg-4 mb-4">
                                 <a href="#" class="text-decoration-none">
-                                    <div class="card shadow-lg border-0 rounded-3 bg-light text-center py-2">
+                                    <div class="card shadow-lg border border-warning rounded-3 bg-light text-center py-2">
                                         <div class="card-body">
                                             <h6 class="text-muted text-uppercase fw-light">Total Evaluated Answers</h6>
                                             <h2 class="fw-bold text-success">{{ $totalEvaluated }}</h2> <!-- 🟢 Count Focused -->
@@ -152,7 +156,7 @@
                     
                             <div class="col-md-6 col-lg-4 mb-4">
                                 <a href="#" class="text-decoration-none">
-                                    <div class="card shadow-lg border-0 rounded-3 bg-light text-center py-2">
+                                    <div class="card shadow-lg border border-warning rounded-3 bg-light text-center py-2">
                                         <div class="card-body">
                                             <h6 class="text-muted text-uppercase fw-light">Total Pending Answers</h6>
                                             <h2 class="fw-bold text-danger">{{ $totalPending }}</h2> <!-- 🔴 Count Focused -->

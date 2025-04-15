@@ -236,7 +236,7 @@ class FrontController extends Controller
                     ->exists();
 
         if ($hasPlan) {
-            return redirect()->route('dashboard')->with('success', 'Welcome back! You already have a plan.');
+            return redirect()->route('user.count')->with('success', 'Welcome back! You already have a plan.');
         }
 
         return redirect()->route('user.questionadd')->with('success', 'OTP Verified! Please continue.');
